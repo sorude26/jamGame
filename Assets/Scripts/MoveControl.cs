@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// 移動関係の基底クラスRigidboyを持つ
 /// </summary>
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody2D))]
 public abstract class MoveControl : MonoBehaviour
 {
     private void OnEnable()
