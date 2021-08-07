@@ -32,6 +32,6 @@ public class MoveStraight : MoveControl
 
     public override void GameEnd()
     {
-        throw new System.NotImplementedException();
+        m_move = false;
     }
 }

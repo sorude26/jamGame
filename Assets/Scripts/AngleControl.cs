@@ -10,6 +10,6 @@ public class AngleControl : MonoBehaviour
     {
         float x = Input.GetAxisRaw(m_inputHname);
         float y = Input.GetAxisRaw(m_inputVname);
-        transform.up = new Vector2(x, y).normalized;
+        transform.up = (new Vector2(x, y) + Vector2.right).normalized * transform.localScale;
     }
 }

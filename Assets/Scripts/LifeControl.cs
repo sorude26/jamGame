@@ -5,10 +5,11 @@ using UnityEngine;
 public class LifeControl : MonoBehaviour,IDamage
 {
     [SerializeField] int m_maxLife = 10;
+    [SerializeField] Lifegage m_gage;
     public int Life { get; private set; }
     private void Start()
     {
-        Life = m_maxLife;
+        StartSet();
     }
     public virtual void Damage(int damage)
     {
@@ -17,6 +18,10 @@ public class LifeControl : MonoBehaviour,IDamage
             return;
         }
         Life -= damage;
+        if (m_gage)
+        {
+            m_gage.ValueSet(m_maxLife, Life);
+        }
         if (Life <= 0)
         {
             Dead();
@@ -25,5 +30,9 @@ public class LifeControl : MonoBehaviour,IDamage
     public virtual void Dead()
     {
         Destroy(this.gameObject);
+    }
+    protected virtual void StartSet()
+    {
+        Life = m_maxLife;
     }
 }

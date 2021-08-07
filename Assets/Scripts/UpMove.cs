@@ -28,6 +28,6 @@ public class UpMove : MoveControl
 
     public override void GameEnd()
     {
-        throw new System.NotImplementedException();
+        m_move = false;
     }
 }

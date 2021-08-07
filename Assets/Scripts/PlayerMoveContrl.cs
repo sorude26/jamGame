@@ -6,8 +6,11 @@ public class PlayerMoveContrl : MoveControl
     [SerializeField] string m_inputHname = "Horizontal";
     [SerializeField] string m_inputVname = "Vertical";
     [SerializeField] float m_moveSpeed = 1f;
+    [SerializeField] GameObject m_shot = default;
     bool m_move;
     Rigidbody2D m_rB;
+    float m_h = 0f;
+    float m_lastHorizontalInput = 1f;
     private void Start()
     {
         m_rB = GetComponent<Rigidbody2D>();
@@ -20,13 +23,28 @@ public class PlayerMoveContrl : MoveControl
             m_rB.velocity = Vector2.zero;
             return;
         }
-        float x = Input.GetAxisRaw(m_inputHname);
-        float y = Input.GetAxisRaw(m_inputVname);
-        m_rB.velocity = new Vector2(x, y).normalized * m_moveSpeed;
+        m_h = Input.GetAxisRaw(m_inputHname);
+        float v = Input.GetAxisRaw(m_inputVname);
+        FlipX(m_h);
+        m_rB.velocity = new Vector2(m_h, v).normalized * m_moveSpeed;
     }
     
     public override void GameEnd()
     {
         m_move = false;
+    }
+    void FlipX(float horizontalInput)
+    {
+        if (horizontalInput != 0)
+        {
+            if (horizontalInput * m_lastHorizontalInput < 0f)
+            {
+                Vector3 scale = this.transform.localScale;
+                scale.x *= -1;
+                this.transform.localScale = scale;
+                m_shot.transform.localScale = scale;
+            }
+            m_lastHorizontalInput = m_h;
+        }
     }
 }

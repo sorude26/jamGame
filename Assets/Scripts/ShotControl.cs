@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class ShotControl : MonoBehaviour
 {
-    [SerializeField] GameObject m_shotPrefab;
+    [SerializeField] Shot m_shotPrefab;
     [SerializeField] string m_shotButton = "Shot";
     [SerializeField] Transform m_muzzle;
     [SerializeField] float m_shotInterval = 0.2f;
+    [SerializeField] string m_shotName = "Player";
     float m_shotTimer = 0;
     private void Update()
     {
@@ -17,6 +18,7 @@ public class ShotControl : MonoBehaviour
             if (m_shotTimer >= m_shotInterval)
             {
                 var shot = Instantiate(m_shotPrefab);
+                shot.SetName(m_shotName);
                 shot.transform.position = m_muzzle.position;
                 shot.transform.rotation = this.transform.rotation;
                 m_shotTimer = 0;
