@@ -34,4 +34,8 @@ public class MoveStraight : MoveControl
     {
         m_move = false;
     }
+    public void SetDir(Vector2 dir)
+    {
+        m_vec = dir.normalized;
+    }
 }

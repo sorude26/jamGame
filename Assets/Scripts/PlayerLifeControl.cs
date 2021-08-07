@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerLifeControl : LifeControl
 {
+    [SerializeField] GameObject m_effect;
     private void OnEnable()
     {
         EventManager.OnGameEnd += Call;
@@ -11,6 +12,14 @@ public class PlayerLifeControl : LifeControl
     private void OnDisable()
     {
         EventManager.OnGameEnd -= Call;
+    }
+    public override void Damage(int damage)
+    {
+        if (m_effect)
+        {
+            Instantiate(m_effect).transform.position = this.transform.position;
+        }
+        base.Damage(damage);
     }
     public override void Dead()
     {

@@ -8,6 +8,7 @@ public class UpMove : MoveControl
     [SerializeField] private float m_speed = 5f;
     private Rigidbody2D m_rb;
     private bool m_move;
+    [SerializeField] bool m_return;
     void Start()
     {
         m_rb = GetComponent<Rigidbody2D>();
@@ -29,5 +30,20 @@ public class UpMove : MoveControl
     public override void GameEnd()
     {
         m_move = false;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!m_return)
+        {
+            return;
+        }
+        if (collision.tag =="Player")
+        {
+            ChangeMove();
+        }
+    }
+    public void ChangeMove()
+    {
+        m_speed = -m_speed;
     }
 }

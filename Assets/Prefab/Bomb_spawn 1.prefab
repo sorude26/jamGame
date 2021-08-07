@@ -1454,8 +1454,11 @@ MonoBehaviour:
   - {fileID: 5233428583260782963}
   - {fileID: 4493678403851872018}
   - {fileID: 204912124615413442}
-  spawn_bomb: {fileID: 6102665286892172766, guid: be5197bd77754784e922a1ae4adedcc6,
+  spawn_bomb: {fileID: 2579666800620171151, guid: be5197bd77754784e922a1ae4adedcc6,
     type: 3}
+  m_spawnTime: 5
+  m_sapawnminTime: 2
+  m_speedUpSpeed: 0.5
 --- !u!1 &8345573024431265148
 GameObject:
   m_ObjectHideFlags: 0
