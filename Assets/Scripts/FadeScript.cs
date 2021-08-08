@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
+using System;
 using UnityEngine.UI;
 
 public class FadeScript : MonoBehaviour
@@ -12,28 +12,25 @@ public class FadeScript : MonoBehaviour
     public bool isFadeout = false;
     public bool isFadein = false;
 
-    Image fadeImage;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] Image fadeImage;
+    private void Awake()
     {
-        fadeImage = GetComponent<Image>();
         red = fadeImage.color.r;
         green = fadeImage.color.g;
         blue = fadeImage.color.b;
         alfa = fadeImage.color.a;
     }
 
-    // Update is called once per frame
-    public void startFadeout()
+    public void StartFadeout(Action FadeOutEvent)
     {
-        StartCoroutine(FadeOutStart());
+        StartCoroutine(FadeOutStart(FadeOutEvent));
     }
 
-    public void startFadeIn()
+    public void StartFadeIn(Action FadeInEvent)
     {
-        StartCoroutine(FadeInStart());
+        StartCoroutine(FadeInStart(FadeInEvent));
     }
-    IEnumerator FadeOutStart()
+    IEnumerator FadeOutStart(Action FadeOutEvent)
     {
         isFadeout = true;
         while (isFadeout)
@@ -41,9 +38,9 @@ public class FadeScript : MonoBehaviour
             FadeOut();
             yield return new WaitForEndOfFrame();
         }
-
+        FadeOutEvent?.Invoke();
     }
-    IEnumerator FadeInStart()
+    IEnumerator FadeInStart(Action FadeInEvent)
     {
         isFadein = true;
         while (isFadein)
@@ -51,6 +48,7 @@ public class FadeScript : MonoBehaviour
             FadeIn();
             yield return new WaitForEndOfFrame();
         }
+        FadeInEvent?.Invoke();
     }
     void FadeIn()
     {

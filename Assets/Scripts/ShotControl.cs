@@ -8,11 +8,13 @@ public class ShotControl : MonoBehaviour
     [SerializeField] string m_shotButton = "Shot";
     [SerializeField] Transform m_muzzle;
     [SerializeField] float m_shotInterval = 0.2f;
-    [SerializeField] string m_shotName = "Player";
+    [SerializeField] GameObject m_owner;
+    string m_shotName = "Player";
     float m_shotTimer = 0;
     bool m_shot;
     private void Start()
     {
+        m_shotName = m_owner.name;
         EventManager.OnGameStart += StartShot;
         EventManager.OnGameEnd += ShotStop;
     }

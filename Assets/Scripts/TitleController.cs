@@ -21,6 +21,7 @@ public class TitleController : MonoBehaviour
     private bool m_ready1 = false;
     private bool m_ready2 = false;
     private bool m_trigger = false;
+    [SerializeField] FadeScript m_fade;
 
     void Start()
     {
@@ -38,16 +39,16 @@ public class TitleController : MonoBehaviour
         m_button = m_selectobj.transform.Find("Button").gameObject;
         m_button.SetActive(false);
         m_titleAnim = GameObject.Find("TitleAnim");
-
-        StateChanger();
+        m_fade.StartFadeIn(StateChanger);
     }
 
     void Update()
     {
         if (m_state == State.select)
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.RightShift))
             {
+                EffectManager.Instance.PlayEffect(EffectType.Hit, new Vector2(1000, 1000));
                 if (m_ready1) 
                 { 
                     m_ready1 = false;
@@ -61,8 +62,9 @@ public class TitleController : MonoBehaviour
                     m_ok1.SetActive(true);
                 }
             }
-            if (Input.GetKeyDown(KeyCode.RightShift))
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
+                EffectManager.Instance.PlayEffect(EffectType.Hit, new Vector2(1000, 1000));
                 if (m_ready2) 
                 { 
                     m_ready2 = false;
@@ -108,5 +110,6 @@ public class TitleController : MonoBehaviour
     public void OnClick()
     {
         m_state = State.select;
+        EffectManager.Instance.PlayEffect(EffectType.Hit, new Vector2(1000, 1000));
     }
 }

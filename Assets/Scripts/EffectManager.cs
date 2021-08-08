@@ -8,6 +8,9 @@ public enum EffectType
     Explosion,
     Explosion1,
     Explosion2,
+    Hanabi,
+    BottonOn,
+    Hanabi2,
 }
 /// <summary>
 /// エフェクトを再生する

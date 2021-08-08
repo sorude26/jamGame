@@ -29,6 +29,7 @@ public class PlayerMoveContrl : MoveControl
         FlipX(m_h);
         m_rB.velocity = new Vector2(m_h, v).normalized * m_moveSpeed;
     }
+   
     void GameStart()
     {
         m_move = true;

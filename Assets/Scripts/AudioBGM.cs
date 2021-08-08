@@ -12,18 +12,15 @@ public class AudioBGM : MonoBehaviour
     void Start()
     {
         m_as = GetComponent<AudioSource>();
-        m_as.clip = m_start;
-        m_as.Play();
+        Battle();
     }
 
     private void OnEnable()
     {
-        EventManager.OnGameStart += Battle;
         EventManager.OnGameEnd += Win;
     }
     private void OnDisable()
     {
-        EventManager.OnGameStart -= Battle;
         EventManager.OnGameEnd -= Win;
     }
 

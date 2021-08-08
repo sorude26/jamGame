@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class PlayerLifeControl : LifeControl
 {
+    [SerializeField] GameObject m_winPanel;
+    protected override void StartSet()
+    {
+        if (m_winPanel)
+        {
+            m_winPanel.SetActive(false);
+        }
+        base.StartSet();
+    }
     private void OnEnable()
     {
         EventManager.OnGameEnd += Call;
@@ -26,6 +35,14 @@ public class PlayerLifeControl : LifeControl
     public void Call()
     {
         GameManager.Instance.Life = true;
-        Debug.Log(this.gameObject.name + "Win!");
+        EventManager.OnWinCheck += WinCheck;
+    }
+    public void WinCheck()
+    {
+        if (m_winPanel)
+        {
+            m_winPanel.SetActive(true);
+        }
+        EventManager.OnWinCheck -= WinCheck;
     }
 }

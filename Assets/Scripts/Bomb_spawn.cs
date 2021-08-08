@@ -11,6 +11,7 @@ public class Bomb_spawn : MonoBehaviour
     [SerializeField] float m_sapawnminTime = 2.0F;
     [SerializeField] float m_speedUpSpeed = 0.5F;
     bool m_spawn;
+    bool m_hanabi;
     void Start()
     {
         EventManager.OnGameStart += StartSpawn;
@@ -21,6 +22,15 @@ public class Bomb_spawn : MonoBehaviour
     {
         if (!m_spawn)
         {
+            if (m_hanabi && GameManager.Instance.Life)
+            {
+                m_timer += Time.deltaTime;
+                if (m_timer >= m_spawnTime)
+                {
+                    Hanabi();
+                    m_timer = 0;
+                }
+            }
             return;
         }
         m_timer +=  Time.deltaTime;
@@ -44,11 +54,18 @@ public class Bomb_spawn : MonoBehaviour
     private void SpawnStop()
     {
         m_spawn = false;
+        m_hanabi = true;
+        m_spawnTime = 1f;
         EventManager.OnGameEnd -= SpawnStop;
     }
     void StartSpawn()
     {
         m_spawn = true;
         EventManager.OnGameStart -= StartSpawn;
+    }
+    void Hanabi()
+    {
+        int p = Random.Range(0, m_spawnPoint.Length);
+        EffectManager.Instance.PlayEffect(EffectType.Hanabi, m_spawnPoint[p].position);
     }
 }
