@@ -13,7 +13,7 @@ public class Bomb_spawn : MonoBehaviour
     bool m_spawn;
     void Start()
     {
-        m_spawn = true;
+        EventManager.OnGameStart += StartSpawn;
         EventManager.OnGameEnd += SpawnStop;
     }
 
@@ -45,5 +45,10 @@ public class Bomb_spawn : MonoBehaviour
     {
         m_spawn = false;
         EventManager.OnGameEnd -= SpawnStop;
+    }
+    void StartSpawn()
+    {
+        m_spawn = true;
+        EventManager.OnGameStart -= StartSpawn;
     }
 }

@@ -10,6 +10,13 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        StartCoroutine(TestStart());
+    }
+    IEnumerator TestStart()
+    {
+        yield return new WaitForSeconds(3f);
+        EventManager.GameStart();
+        Debug.Log("Start");
     }
     public void GameSet()
     {

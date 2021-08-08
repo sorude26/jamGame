@@ -13,7 +13,7 @@ public class ShotControl : MonoBehaviour
     bool m_shot;
     private void Start()
     {
-        m_shot = true;
+        EventManager.OnGameStart += StartShot;
         EventManager.OnGameEnd += ShotStop;
     }
     private void Update()
@@ -38,8 +38,14 @@ public class ShotControl : MonoBehaviour
             }
         }
     }
+    void StartShot()
+    {
+        m_shot = true;
+        EventManager.OnGameStart -= StartShot;
+    }
     public void ShotStop()
     {
         m_shot = false;
+        EventManager.OnGameEnd -= ShotStop;
     }
 }
