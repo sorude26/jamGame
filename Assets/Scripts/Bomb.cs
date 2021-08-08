@@ -12,7 +12,7 @@ public class Bomb : LifeControl
         {
             float random = Random.Range(0f, 360f);
             Instantiate(m_bullet, gameObject.transform.position, Quaternion.Euler(0, 0, random));
-            
+            EffectManager.Instance.PlayEffect(EffectType.Explosion1, transform.position);
         }
         base.Dead();
     }

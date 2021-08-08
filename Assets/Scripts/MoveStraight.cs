@@ -22,7 +22,7 @@ public class MoveStraight : MoveControl
     {
         if (!m_move)
         {
-            m_vec = Vector2.zero;
+            m_rb.velocity = Vector2.zero;
         }
         else
         {

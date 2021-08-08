@@ -37,8 +37,9 @@ public class Bomb_spawn : MonoBehaviour
         int x = Random.Range(-1, 2);
         int y = Random.Range(-1, 2);
         var bom = Instantiate(spawn_bomb);
-        bom.SetDir(new Vector2(x, y));
+        bom.SetDir(new Vector2(x, y) - (Vector2)m_spawnPoint[p].position);
         bom.gameObject.transform.position = m_spawnPoint[p].position;
+        EffectManager.Instance.PlayEffect(EffectType.Explosion1, m_spawnPoint[p].position);
     }
     private void SpawnStop()
     {
