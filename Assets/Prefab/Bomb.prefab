@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxLife: 1
   m_gage: {fileID: 0}
-  m_bulletNum: 5
+  m_bulletNum: 10
   m_bullet: {fileID: 6631551839042611094, guid: d4796dda103ddfd40b1d8c9360798f2b,
     type: 3}
 --- !u!50 &6102665286892172741
@@ -339,7 +339,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.99765015, g: 0, b: 1, a: 1}
+      maxColor: {r: 0.5074362, g: 0, b: 0.509434, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4937,6 +4937,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BombAnim
+      objectReference: {fileID: 0}
+    - target: {fileID: 7737100732148189706, guid: a5429a55f27fde8469b2f32552a36390,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5429a55f27fde8469b2f32552a36390, type: 3}

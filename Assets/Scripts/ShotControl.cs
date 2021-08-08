@@ -10,11 +10,24 @@ public class ShotControl : MonoBehaviour
     [SerializeField] float m_shotInterval = 0.2f;
     [SerializeField] string m_shotName = "Player";
     float m_shotTimer = 0;
+    bool m_shot;
+    private void Start()
+    {
+        m_shot = true;
+        EventManager.OnGameEnd += ShotStop;
+    }
     private void Update()
     {
-        if (Input.GetButton(m_shotButton))
+        if (!m_shot)
+        {
+            return;
+        }
+        if (m_shotTimer < m_shotInterval)
         {
             m_shotTimer += Time.deltaTime;
+        }
+        if (Input.GetButton(m_shotButton))
+        {
             if (m_shotTimer >= m_shotInterval)
             {
                 var shot = Instantiate(m_shotPrefab);
@@ -24,9 +37,9 @@ public class ShotControl : MonoBehaviour
                 m_shotTimer = 0;
             }
         }
-        else if(m_shotTimer != m_shotInterval)
-        {
-            m_shotTimer = m_shotInterval;
-        }
+    }
+    public void ShotStop()
+    {
+        m_shot = false;
     }
 }
